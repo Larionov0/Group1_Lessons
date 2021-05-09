@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .lol {
+        text-align: center;
+    }
+
+    #morjomi {
+        width: 1400px; 
+        height: 250px;
+    }
+
+    .buttons_place {
+        margin: 0px 100px;
+    }
+
+    .buttons_row {
+        display: flex;
+        justify-content: center;
+    }
+
+    .buttons_row > button {
+        width: 200px;
+        height: 60px;
+        background-color: #ffe7af;
+        margin: 2px;
+    }
+    
+    #calculator {
+        background-color: rgb(245, 245, 252);
+        display: flex;
+        /* justify-content: center; */
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+</style>
+<body>
+    <h2 class="lol">Моя страница</h2>
+    <div class="buttons_place">
+        <div class='buttons_row'>
+            <button onclick="change_styles()">Сменить стиль</button>
+            <button onclick="change_text()">Сменить текст</button>
+        </div>
+        <div class="buttons_row">
+            <button onclick="prizov_morjomi()">Призвать моржоми</button>
+            <button onclick="skrit_morjomi()">Скрыть моржоми</button>
+        </div>
+    </div>
+    <p id="my_text">Какой-то текст</p>
+
+    <div id='calculator'>
+        <h3>Калькулятор квадрата</h3>
+        <input type="number" id='user_input'>
+        <button onclick="calculate_result()">Подсчитать</button>
+        <p id='answer'></p>
+    </div>
+
+    <div id='morjomi_place'></div>
+</body>
+<script>
+    function read_text(){
+        var my_pshka = document.getElementById('my_text')
+        console.log(my_pshka.innerHTML)
+    }
+
+    function change_text(){
+        var my_pshka = document.getElementById('my_text')
+        var text = my_pshka.innerHTML
+        my_pshka.innerHTML = "!!!" + text + '!!!'
+    }
+
+    function change_styles(){
+        var my_pshka = document.getElementById('my_text')
+        my_pshka.style['background-color'] = '#ffe7af'
+        my_pshka.style['font-size'] = '100px'
+    }
+
+    function prizov_morjomi(){
+        var morj_div = document.getElementById('morjomi_place')
+        morj_div.innerHTML = "<img id='morjomi' src='morj.jpg'>"
+    }
+
+    function skrit_morjomi() {
+        var morj_div = document.getElementById('morjomi_place')
+        morj_div.innerHTML = ""
+    }
+
+    function calculate_result(){
+        var input_el = document.getElementById('user_input')
+        var number = input_el.value
+        var result = number * number
+        document.getElementById('answer').innerHTML = result
+    }   
+</script>
+</html>
