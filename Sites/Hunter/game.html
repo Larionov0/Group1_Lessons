@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .sprite {
+        height: 50px;
+        width: 50px;
+    }
+</style>
+<body>
+    <div id='game'>
+        
+    </div>
+</body>
+<script>
+    function create_matrix(n=12, m=20){
+        var grass_src = 'https://i.pinimg.com/originals/fa/29/d3/fa29d32e85cbc1c6e5277b1917fbeec5.jpg'
+        var matrix = []
+        var i = 0
+        while (i < n) {
+            var row = [];
+            var j = 0
+            while (j < m) {
+                row.push(grass_src)
+                j += 1
+            }
+            matrix.push(row)
+            i += 1
+        }
+        return matrix
+    }
+
+
+    function draw_matrix(matrix){
+        var game = document.getElementById('game')
+        var table_html = '<table>'
+        for (row of matrix){
+            table_html += '<tr>'
+            for (img_src of row){
+                table_html += '<td><img class="sprite" src="' + img_src + '"></td>'
+            }
+            table_html += '</tr>'
+        }
+        table_html += '</table>'
+        game.innerHTML = table_html
+    }
+
+    var matrix = create_matrix()
+    draw_matrix(matrix)
+</script>
+</html>
