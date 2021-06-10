@@ -10,6 +10,17 @@
     .sprite {
         height: 50px;
         width: 50px;
+        display: block;
+        margin: 1px;
+        border-radius: 3px;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        padding: 0px;
     }
 </style>
 <body>
@@ -18,8 +29,51 @@
     </div>
 </body>
 <script>
-    function create_matrix(n=12, m=20){
-        var grass_src = 'https://i.pinimg.com/originals/fa/29/d3/fa29d32e85cbc1c6e5277b1917fbeec5.jpg'
+    class GameObject {
+        constructor(name, hp, i, j, sprite){
+            this.name = name
+            this.hp = hp
+            this.i = i
+            this.j = j
+            this.sprite = sprite
+        }
+    }
+
+    class Chicken extends GameObject{
+
+    }
+
+    class Player extends GameObject {
+        constructor(name, hp, i, j, sprite='https://i.pinimg.com/originals/d7/b3/da/d7b3da3d4b19b7f0c44673374158df0a.gif', main_weapon={}){
+            super(name, hp, i, j, sprite)
+            this.main_weapon = main_weapon
+        }
+
+        say_hi(){
+            console.log(this.name + ': Hello! :)')
+        }
+
+        draw(matrix){
+            // Отвечает за отрисовку игрока на матрице
+            matrix[this.i][this.j] = this.sprite
+        }
+
+        move(direction){
+            if (direction == 'w'){
+                this.i -= 1
+            } else if (direction == 'a'){
+                this.j -= 1
+            } else if (direction == 's'){
+                this.i += 1
+            } else if (direction == 'd'){
+                this.j += 1
+            }
+        }
+    }
+
+    function create_matrix(n=13, m=20){
+        // var grass_src = 'https://i.pinimg.com/originals/fa/29/d3/fa29d32e85cbc1c6e5277b1917fbeec5.jpg'
+        var grass_src = 'https://images.unsplash.com/photo-1533460004989-cef01064af7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDd8fHxlbnwwfHx8fA%3D%3D&w=1000&q=80'
         var matrix = []
         var i = 0
         while (i < n) {
@@ -50,7 +104,27 @@
         game.innerHTML = table_html
     }
 
+    var player = new Player('Bob', 4, 3, 3)
     var matrix = create_matrix()
+    player.draw(matrix)
     draw_matrix(matrix)
+
+    function game_cicle(){
+        var matrix = create_matrix()
+        player.draw(matrix)
+        draw_matrix(matrix)
+    }
+
+    function onKeyPress(event) {
+        if (['w', 'a', 's', 'd'].includes(event.key)){
+            player.move(event.key)
+            game_cicle()
+        }
+    }
+
+    document.addEventListener('keypress', onKeyPress);
+
+    
+
 </script>
 </html>
