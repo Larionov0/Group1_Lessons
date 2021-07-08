@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Все города</title>
+</head>
+<style>
+    .city {
+        background-color: rgba(180, 207, 230, 0.795);
+        border-radius: 10px;
+        margin: 5px;
+        padding: 5px;
+        color: rgb(12, 34, 54);
+        text-align: center;
+        width: 80%;
+        transition: 1.5s;
+    }
+
+    #cities {
+        display: flex;
+        justify-content: center;
+        /* border: 1px solid red; */
+    }
+
+    #cities ul {
+        /* border: 1px solid red; */
+        width: 20%;
+    }
+
+    .city:hover {
+        background-color: rgb(154, 226, 184);
+        width: 100%;
+        /* box-shadow: inset 0 0 0 4px #53ea93; */
+        transition: 0.5s;
+    }
+</style>
+<body>
+    <div id="cities">
+        <ul>
+            {% for city in cities %}
+                <li class="city">{{ city.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
