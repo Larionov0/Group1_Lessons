@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import HttpResponse
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 def test_view(request):
     print('О да, оно пришло!!!!')
@@ -28,3 +31,6 @@ urlpatterns = [
     path('test/', test_view),
     path('main/', include('MainApp.urls'))
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

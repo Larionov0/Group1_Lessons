@@ -19,3 +19,9 @@ def show_cities(request):
                       'a': 'Привет из контекста!',
                       'cities': cities
                   })
+
+
+def all_reviews(request):
+    revs = Review.objects.all()
+    return render(request, 'all_reviews.html', context={'reviews': revs})
+
