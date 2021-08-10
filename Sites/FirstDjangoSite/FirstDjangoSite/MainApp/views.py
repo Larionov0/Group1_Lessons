@@ -22,6 +22,7 @@ def show_cities(request):
 
 
 def all_reviews(request):
+    user = request.user
     revs = Review.objects.all()
-    return render(request, 'all_reviews.html', context={'reviews': revs})
+    return render(request, 'all_reviews.html', context={'reviews': revs, 'user': user, 'is_auth': user.is_authenticated})
 

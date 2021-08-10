@@ -23,7 +23,6 @@
 
     .review h3 {
         text-align: center;
-        color: white;
     }
 
     .review button {
@@ -43,11 +42,6 @@
         padding: 7px;
     }
 
-    .text_place {
-        /* background-color: rgb(0, 0, 0); */
-        color: white;
-    }
-
     #reviews {
         /* background-color: rgb(48, 48, 73); */
         height: 2000px;
@@ -60,14 +54,18 @@
 
     body {
         margin: 0px;
-        background: url('{% static 'IMG/cool-background.png' %}') no-repeat;
-        background-size: 100%; /* Современные браузеры */
-        background-attachment: fixed;
         padding: 0px;
     }
 </style>
 <body>
     <div id="content">
+        <div id="data">
+            {% if not auth %}
+                <a href="/auth/sign_in"><button>Войти</button></a>
+            {% endif %}
+            <h3>{{ user }}</h3>
+            
+        </div>
         <div id="reviews">
             {% for rev in reviews %}
                 <div class="review">

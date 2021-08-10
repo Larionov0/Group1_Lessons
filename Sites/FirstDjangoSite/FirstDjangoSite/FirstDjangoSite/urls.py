@@ -29,7 +29,8 @@ def test_view(request):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', test_view),
-    path('main/', include('MainApp.urls'))
+    path('main/', include('MainApp.urls')),
+    path('auth/', include('auth_sys.urls'))
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
