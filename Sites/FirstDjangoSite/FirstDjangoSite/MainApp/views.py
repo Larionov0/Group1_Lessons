@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.shortcuts import HttpResponse
 from .models import *
 
@@ -26,3 +26,38 @@ def all_reviews(request):
     revs = Review.objects.all()
     return render(request, 'all_reviews.html', context={'reviews': revs, 'user': user, 'is_auth': user.is_authenticated})
 
+
+def edit_review(request, rev_id):
+    review = Review.objects.get(id=rev_id)
+
+    if request.method == 'GET':
+        pass
+    elif request.method == 'POST':
+        name = request.POST['name']
+        text = request.POST['text']
+        rate = request.POST['rate']
+        shop_id = request.POST['shop']
+        shop = Shop.objects.get(id=shop_id)
+
+        review.name = name
+        review.text = text
+        review.rate = rate
+        review.shop = shop
+
+        review.save()
+
+    return render(request, 'edit_review.html', context={'review': review, 'shops_list': Shop.objects.all()})
+
+
+def create_review(request):
+    new_review = Review.objects.create(
+        name='Новый обзор',
+        text='',
+        shop=Shop.objects.all()[0],
+    )
+    return redirect(f'/main/edit_review/{new_review.id}')
+
+
+def delete_review(request, rev_id):
+    Review.objects.get(id=rev_id).delete()
+    return redirect('/main/all_reviews')

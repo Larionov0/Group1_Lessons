@@ -21,7 +21,7 @@ class City(models.Model):
 class Shop(models.Model):
     name = models.CharField(max_length=60)
     description = models.TextField(max_length=1000, blank=True, null=True)
-    site_url = models.CharField(max_length=100)
+    site_url = models.CharField(max_length=100, blank=True)
     cities = models.ManyToManyField(City)
 
     def __str__(self):
@@ -30,7 +30,7 @@ class Shop(models.Model):
 
 class Review(models.Model):
     name = models.CharField(max_length=60)
-    text = models.TextField(max_length=2000)
+    text = models.TextField(max_length=2000, blank=True)
     rate = models.IntegerField(default=5)
     shop = models.ForeignKey(Shop, on_delete=models.PROTECT)
     archived = models.BooleanField(default=False)

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edt review</title>
+
+    <!-- <script src="jquery-3.5.1.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+</head>
+<style>
+    #store {
+        width: 200px;
+    }
+</style>
+<body>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="">Название</label><input type="text" name="name" value="{{ review.name }}"><br>
+        <label for="">Текст</label><br><textarea type="text" name="text" cols="30" rows="10">{{ review.text }}</textarea><br>
+
+        <label for="">Оценка</label><input type="number" name="rate" value='{{ review.rate }}'><br>
+
+        <select id='store' name='shop'>
+            {% for shop in shops_list %}
+                {% if shop == review.shop %}
+                    <option value="{{ shop.id }}" selected>{{ shop.name }}</option>
+                {% else %}
+                    <option value="{{ shop.id }}">{{ shop.name }}</option>
+                {% endif %}
+            {% endfor %}
+        </select> <br><br>
+
+        <div class="buttons">
+            <input type="submit" value="Сохранить">
+            <a href="/main/delete_review/{{ review.id }}"><input type="button" name="" id="" value="Удалить"></a>
+            <a href="/main/all_reviews"><input type="button" name="" id="" value="На главную"></a>
+        </div>
+    </form>
+</body>
+<script>
+    $(document).ready(function() {
+        $('#store').select2({
+            placeholder: "Выберите город",
+            maximumSelectionLength: 2,
+            language: "ru"
+        });
+    });
+</script>
+</html>

@@ -15,7 +15,7 @@
     .review {
         background-color: rgba(150, 195, 212, 0.336);
         border-radius: 10px;
-        width: 50%;
+        width: 70%;
         margin: 10px;
         padding: 10px;
         border: 3px solid rgb(148, 67, 137);
@@ -28,6 +28,8 @@
     .review button {
         background-color: rgba(133, 49, 121, 0.685);
         border-radius: 5px;
+        width: 140px;
+        margin: 4px;
     }
 
     #reviews {
@@ -56,15 +58,22 @@
         margin: 0px;
         padding: 0px;
     }
+
+    .upper_panel {
+        text-align: right;
+    }
 </style>
 <body>
     <div id="content">
         <div id="data">
-            {% if not auth %}
-                <a href="/auth/sign_in"><button>Войти</button></a>
-            {% endif %}
-            <h3>{{ user }}</h3>
-            
+            <div class="upper_panel">
+                {% if not is_auth %}
+                    <a href="/auth/sign_in"><button>Войти</button></a>
+                {% else %}
+                    <h3>{{ user }}</h3>
+                {% endif %}
+            </div>
+            <a href="/main/create_review"><button>Новый обзор</button></a>
         </div>
         <div id="reviews">
             {% for rev in reviews %}
@@ -74,7 +83,8 @@
                         <p>{{ rev.text }}</p>
                     </div>
                     <div class='buttons_place'>
-                        <button>{{ rev.shop.name }}</button>
+                        <a href="/main/edit_review/{{ rev.id }}"><button>Редактировать</button></a>
+                        <a href="{{ rev.shop.site_url }}" target="_blank"><button>{{ rev.shop.name }}</button></a>
                     </div>
                 </div>
             {% endfor %}
